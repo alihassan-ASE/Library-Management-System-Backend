@@ -331,7 +331,7 @@ const getBooksPublishedAfterYear = async (req, res) => {
     const { rows: books, count: totalBooks } =
       await booksPublishedAfterYear(param);
 
-    const remainingBooks = (totalBooks - page) * limit;
+    const remainingBooks = Math.max(totalBooks - page * limit, 0);
 
     res.status(200).json({
       totalBooks,
@@ -369,7 +369,7 @@ const getBooksPublishedBeforeYear = async (req, res) => {
     const { rows: books, count: totalBooks } =
       await booksPublishedBeforeYear(param);
 
-    const remainingBooks = (totalBooks - page) * limit;
+    const remainingBooks = Math.max(totalBooks - page * limit, 0);
 
     res.status(200).json({
       totalBooks,
